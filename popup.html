@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Maps Easy Scrape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --bg: #F9FAFB;
+      --text: #1F2937;
+      --border: #E5E7EB;
+    }
+
+    body { 
+      min-width: 670px; 
+      padding: 24px;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+
+    .title-container h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .title-container p {
+      margin: 4px 0 0 0;
+      font-size: 14px;
+      color: #6B7280;
+    }
+
+    .credit {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    .credit a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .main-content {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    #message {
+      font-size: 15px;
+      padding: 12px 16px;
+      background: #F3F4F6;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      background-color: var(--primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .button:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .input {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      width: 200px;
+      transition: border-color 0.2s ease;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #F9FAFB;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    th:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    tr:hover td {
+      background-color: #F9FAFB;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #6B7280;
+    }
+  </style>  
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">🗺️</div>
+      <div class="title-container">
+        <h1>Google Maps Extractor</h1>
+        <p>Extract business information with ease</p>
+      </div>
+    </div>
+    <div class="credit">
+      <a href="https://mazithesage.vercel.app" target="_blank">Created by Mazi</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div id="message">Checking URL...</div>
+    
+    <div class="actions">
+      <button id="actionButton" class="button" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        Scrape Data
+      </button>
+      
+      <button id="downloadCsvButton" class="button" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Download CSV
+      </button>
+      
+      <input type="text" id="filenameInput" class="input" placeholder="Enter filename for CSV" />
+    </div>
+
+    <table id="resultsTable">
+      <tbody>
+        <tr class="empty-state">
+          <td colspan="8">No data yet. Click "Scrape Data" to begin extraction.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
